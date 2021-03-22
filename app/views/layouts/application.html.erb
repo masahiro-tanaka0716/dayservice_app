@@ -2,14 +2,56 @@
 <html>
   <head>
     <title>DayserviceApp</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
   </head>
 
   <body>
+    <% if flash[:notice] %>
+   <div class="alert alert-info" role="alert">
+     <p class="notice"><%= notice %></p>
+   </div>
+ <% end %>
+   
+ <% if flash[:alert] %>
+   <div class="alert alert-danger" role="alert">
+     <p class="alert"><%= alert %></p>
+   </div>
+ <% end %>
+ 
+ <header class="mb-4">
+ <nav class="navbar navbar-expand navbar-dark bg-info">
+   <h1 style="font-family: cursive"><a class="navbar-brand" href="/">Sakuraデイサービス</a></h1>
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+     <span class="navbar-toggle-icon"></span>
+   </button>
+   
+   <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+     <ul class="navbar-nav">
+      <% if user_signed_in? %>
+       <li class="nav-item"></li>
+       <li class="nav-item"></li>
+       <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
+     <% else %>    
+       
+       <li class="nav-item"><%= link_to 'ログイン', new_user_session_path, class: 'nav-link' %></li>
+       <li class="nav-item"><%= link_to '新規ユーザー登録', new_user_registration_path, class: 'nav-link' %></li>
+     <% end %>
+     </ul>
+   </div>
+ </nav>
+</header>
     <%= yield %>
   </body>
 </html>
