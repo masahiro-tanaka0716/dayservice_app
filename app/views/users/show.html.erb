@@ -1,2 +1,71 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="base-container mw-xl">
+<div class="texts-wrapper">
+  <div class="contents-title text-center">
+    <h2 style="font-family: Hiragino Mincho ProN">利用者詳細情報</h2>
+    <br>
+    <br>
+    
+      <div class="row justify-content-center">
+        
+          <div class="col-xl-4 card">
+            <div class="card-header">
+              <%= attachment_image_tag @user, :profile_image, :size => "320x320", fallback: "no-image.png" %>
+            </div>
+            <div class="card-body">
+              <h3><%= @user.username %></h3>
+              <% if @user.id == current_user.id %>
+              <p><%= @user.email %></p>
+              <p><%= link_to '編集', edit_user_path(@user), class: 'btn btn-primary' %></p>
+              <% end %>
+              <div>
+                <p><%= simple_format @user.profile %></p>
+              </div>
+            </div>
+          </div>
+      </div>
+      
+      <div class="row justify-content-center">
+          <div class="col-xl-4 card">
+           <% @user.reports.each do |report| %>
+            <div class="card-header">
+              <h2><%= report.created_at.strftime("%Y年%m月%d日") %>の様子</h2>
+              <%= link_to report_path(report) do %>
+               <%= attachment_image_tag report, :image, :size => "320x320", fallback: "no-image.png" %>
+              <% end %>
+            </div>
+            <div class="card-body">
+              <p><%= link_to report_path(report) do %>
+                    <span class="panel-icon">
+                      <i class="fas fa-book"></i>
+                    </span>
+                    この日の連絡帳を見る
+                  <% end %>
+              </p>
+              <% if @user.id == current_user.id %>
+              <p><%= link_to edit_report_path(report), data: {confirm: "編集しますか?"} do %>
+                      <span class="panel-icon">
+                        <i class="fas fa-edit"></i>
+                      </span>
+                      この連絡帳を編集する
+              <% end %>
+              </p>
+              
+              <p><%= link_to report_path(report), method: :delete, data: {confirm: "削除しますか？"} do %>
+                      <span class="panel-icon">
+                        <i class="fas fa-trash"></i>
+                      </span>
+                      この日の連絡帳を削除する
+              <% end %>
+              </p>
+              <% end %>
+            </div>
+           <% end %>
+          </div>
+      </div>
+      
+  </div>
+</div>
+</div>
+
+
+ 

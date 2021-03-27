@@ -1,6 +1,25 @@
-
-
-<% @users.each do |user| %>
- <%= attachment_image_tag user, :profile_image, fallback: "no-image.png" %>
- <%= user.username %>
-<% end %>
+<div class="base-container mw-xl">
+<div class="texts-wrapper">
+  <div class="contents-title text-center">
+    <h2 style="font-family: Hiragino Mincho ProN">利用者一覧</h2>
+    
+      <div class="row">
+        <% @users.each do |user| %>
+          <div class="col-sm-5">
+            <div class="card">
+              <%=link_to  user_path(user) do %>
+                <%= attachment_image_tag user, :profile_image, :size => "520x520", fallback: "no-image.png" %>
+              <% end %>
+              <h3 class="text-left ml-5">
+                <%= link_to user_path(user) do %>
+                 <%= user.username %>
+                <% end %>
+              </h3>
+              <p class="text-left ml-5">投稿数：　　</p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+  </div>
+</div>
+</div>

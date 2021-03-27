@@ -1,0 +1,41 @@
+<div class="base-container mw-xl">
+<div class="texts-wrapper">
+  <div class="contents-title text-center">
+    <h2 style="font-family: Hiragino Mincho ProN"><%= @report.created_at.strftime("%Y年%m月%d日") %> のご本人様の様子</h2>
+    <br>
+    <br>
+    
+      <div class="row justify-content-center">
+        
+          <div class="col-sm-4 card">
+            <div class="card-header">
+              <%= attachment_image_tag @report, :image, :size => "160x160", fallback: "no-image.png" %>
+            </div>
+            
+          </div>
+          
+        <div class="co-sm-6">
+          <div class="card-body">
+              <p><%= @report.title %></p>
+              
+              <div>
+                <p><%= simple_format @report.body %></p>
+              </div>
+              <div>
+                <% if @report.user.id == current_user.id %>
+                   <!-- ユーザーモデルのユーザ名に紐づいたレポートのインスタンス変数 -->
+                  <%= link_to "編集", edit_report_path(@report), class: 'btn btn-success' %>
+                <% end %>
+              </div>
+            </div>
+         <%= link_to user_path(@report.user) do %>
+           <%= @report.user.username %> さんのページへ
+         <% end %>
+        </div>
+      </div>
+      
+  </div>
+</div>
+</div>
+
+

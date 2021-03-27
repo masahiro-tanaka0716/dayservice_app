@@ -40,9 +40,11 @@
    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
      <ul class="navbar-nav">
       <% if user_signed_in? %>
-       <li class="nav-item"></li>
-       <li class="nav-item"></li>
        <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
+       <li class="nav-item"><%= link_to 'マイページ', user_path(current_user), class: 'nav-link' %></li>
+       <li class="nav-item"><%= link_to '利用者一覧', users_path, class: 'nav-link' %></li>
+       <li class="nav-item"><%= link_to '連絡帳一覧画面', reports_path, class: 'nav-link' %></li>
+       <li class="nav-item"><%= link_to '連絡帳新規投稿', new_report_path, class: 'nav-link' %></li>
      <% else %>    
        
        <li class="nav-item"><%= link_to 'ログイン', new_user_session_path, class: 'nav-link' %></li>

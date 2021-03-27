@@ -1,0 +1,54 @@
+<div class="base-container mw-xl">
+<div class="texts-wrapper">
+  <div class="contents-title text-center">
+   <% @reports.each do |report| %>
+    <h2 style="font-family: Hiragino Mincho ProN">
+      <%= link_to report_path(report) do %>
+        <%= report.created_at.strftime("%Y年%m月%d日") %>の出来事<!-- config/application.rb に　「config.tim_zone = 'Tokyo'」を記述する -->
+      <% end %>
+    </h2>
+    <div class="content-wrapper ml-5 pl-5">
+      <div class="row">
+          <div class="col-sm-5">
+            <div class="card">
+              <div class="card-header">
+                <%= link_to user_path(report.user.id) do %><!-- reportに紐づいた user.id -->
+                 <%= attachment_image_tag report.user, :profile_image, :size => "160x160", fallback: 'no-image.png' %>
+                <% end %>
+              </div>
+              <div class="card-body">
+                <%= link_to user_path(report.user.id) do %><!-- report に紐づいた user.id -->
+                  <h3><%= report.user.username %>の詳細情報<!-- report に紐づいた username --></h3>
+                <% end %>
+              </div>
+            </div>
+          </div>
+           
+          <div class="col-sm-5">
+            <div class="card">
+              <div class="card-header">
+                <%= link_to report_path(report) do %>
+                 <%= attachment_image_tag report, :image, :size => "160x160" %>
+                <% end %>
+              </div>
+              <div class="card-body">
+                <p><%= report.title %></p>
+                <p><%= report.body %></p>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+   <% end %>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
