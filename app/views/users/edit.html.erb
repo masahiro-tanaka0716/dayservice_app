@@ -1,6 +1,18 @@
   <div class="text-center mb-4">
     <h2>利用者情報編集画面</h2>
    </div> 
+   
+   <% if @user.errors.any? %>
+<div id="error_explanation">
+   <h2><%= pluralize(@user.errors.count, "error") %></h2>
+   <ul>
+     <% @user.errors.full_messages.each do |message| %>
+     <li><%= message %></li>
+     <% end %>
+   </ul>
+ </div>
+<% end %>
+
 <div class="row mt-4 pt-4">
   <div class="offset-sm-3 col-sm-6">
     <%= form_for @user do |f| %>

@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @reports = Report.order(id: :desc)
   end
@@ -14,12 +15,18 @@ class ReportsController < ApplicationController
   def create
     @report = Report.new(report_params)
     @report.user_id = current_user.id 
-    @report.save
-    redirect_to reports_path(@user)
+    if @report.save
+      redirect_to reports_path(@user)
+    else
+      render :new
+    end
   end
 
   def edit
     @report = Report.find(params[:id])
+    if @report.user != current_user
+      redirect_to reports_path, alert: '不正なアクセスです'
+    end
   end
   
   def update
@@ -27,6 +34,8 @@ class ReportsController < ApplicationController
     @report.user_id = current_user.id
     if @report.update(report_params)
      redirect_to report_path(@report), notice: '更新しました。'
+   else
+     render :edit
     end
   end
   

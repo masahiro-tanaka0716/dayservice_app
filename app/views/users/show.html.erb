@@ -34,6 +34,7 @@
               <% end %>
             </div>
             <div class="card-body">
+             <% if @user.id == current_user.id %>
               <p><%= link_to report_path(report) do %>
                     <span class="panel-icon">
                       <i class="fas fa-book"></i>
@@ -58,6 +59,7 @@
               <% end %>
               </p>
               <% end %>
+             <% end %>
             </div>
            <% end %>
           </div>

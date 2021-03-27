@@ -24,3 +24,11 @@
   border-radius: 50%;
 }
 
+.main-image {
+  height: 900px;
+  width: 900px;
+  background-image: url(day.png);
+  background-repeat: none;
+  background-size: contain;
+  text-align: center;
+}
